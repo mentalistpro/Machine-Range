@@ -14,14 +14,24 @@ PrefabFiles =
 
 local _G = GLOBAL
 
-if GetModConfigData("Range Check Time") == "short" then
-	_G.TUNING.RANGE_CHECK_TIME = 10
-elseif GetModConfigData("Range Check Time") == "default" then
-	_G.TUNING.RANGE_CHECK_TIME = 30
-elseif GetModConfigData("Range Check Time") == "long" then
-	_G.TUNING.RANGE_CHECK_TIME = 60
-elseif GetModConfigData("Range Check Time") == "vlong" then
-	_G.TUNING.RANGE_CHECK_TIME = 180
+if GetModConfigData("range_fadetime") == 0 then
+	TUNING.RANGE_FADE_TIME = 2
+elseif GetModConfigData("range_fadetime") == 1 then
+	TUNING.RANGE_FADE_TIME = 30
+elseif GetModConfigData("range_fadetime") == 2 then
+	TUNING.RANGE_FADE_TIME = 60
+elseif GetModConfigData("range_fadetime") == 3 then
+	TUNING.RANGE_FADE_TIME = 180
+end
+
+if GetModConfigData("range_colour") == 0 then
+	TUNING.RANGE_COLOUR = 10
+elseif GetModConfigData("range_colour") == 1 then
+	TUNING.RANGE_COLOUR = 30
+elseif GetModConfigData("range_colour") == 2 then
+	TUNING.RANGE_COLOUR = 60
+elseif GetModConfigData("range_colour") == 3 then
+	TUNING.RANGE_COLOUR = 180
 end
 
 -----------------------------------------------------------------------------
@@ -32,6 +42,7 @@ local function MachineOnRemove(inst)
 	local range_indicators = _G.TheSim:FindEntities(pos.x,pos.y,pos.z, 2, {"range_indicator"})
 	for i,v in ipairs(range_indicators) do
 		if v:IsValid() then
+            v.AnimState:SetErosionParams(erode_amount, 0.1, 1.0)
 			v:Remove()
 		end
 	end
@@ -39,19 +50,19 @@ end
 
 local function getstatus_mod(inst, viewer)
 	if inst.name=="Ice Flingomatic" then
-	_G.TUNING.MACHIN = 1
+		TUNING.MACHIN = 1
 	elseif inst.name=="Sprinkler" then
-	_G.TUNING.MACHIN = 2
+		TUNING.MACHIN = 2
 	elseif inst.name=="Oscillating Fan" then
-	_G.TUNING.MACHIN = 3
+		TUNING.MACHIN = 3
 	elseif inst.name=="Lightning Rod" then
-	_G.TUNING.MACHIN = 4
+		TUNING.MACHIN = 4
 	else
-	_G.TUNING.MACHIN = 0
+		TUNING.MACHIN = 0
 	end
 	
-	local pos = Point(inst.Transform:GetWorldPosition())
-	local range_indicators = TheSim:FindEntities(pos.x,pos.y,pos.z, 2, {"range_indicator"} )
+	local pos = _G.Point(inst.Transform:GetWorldPosition())
+	local range_indicators = _G.TheSim:FindEntities(pos.x,pos.y,pos.z, 2, {"range_indicator"} )
 	
 	if #range_indicators < 1 then
 		local range = _G.SpawnPrefab("range_indicator")
