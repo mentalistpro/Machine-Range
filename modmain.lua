@@ -1,27 +1,35 @@
--- _Q_ -- Machin Range Check 1.1
+PrefabFiles =
+{
+	"range",
+}
 
+-----------------------------------------------------------------------------
+
+--//CONTENT//
+--1. Config
+--2. AddPrefabPostInit
+
+-----------------------------------------------------------------------------
+--1. Config
+
+local _G = GLOBAL
 
 if GetModConfigData("Range Check Time") == "short" then
-	GLOBAL.TUNING.RANGE_CHECK_TIME = 10
+	_G.TUNING.RANGE_CHECK_TIME = 10
+elseif GetModConfigData("Range Check Time") == "default" then
+	_G.TUNING.RANGE_CHECK_TIME = 30
+elseif GetModConfigData("Range Check Time") == "long" then
+	_G.TUNING.RANGE_CHECK_TIME = 60
+elseif GetModConfigData("Range Check Time") == "vlong" then
+	_G.TUNING.RANGE_CHECK_TIME = 180
 end
 
-if GetModConfigData("Range Check Time") == "default" then
-	GLOBAL.TUNING.RANGE_CHECK_TIME = 30
-end
+-----------------------------------------------------------------------------
+--2. AddPrefabPostInit
 
-if GetModConfigData("Range Check Time") == "long" then
-	GLOBAL.TUNING.RANGE_CHECK_TIME = 60
-end
-
-if GetModConfigData("Range Check Time") == "vlong" then
-	GLOBAL.TUNING.RANGE_CHECK_TIME = 180
-end
-
-
-function MachineOnRemove(inst)
-	
-	local pos = GLOBAL.Point(inst.Transform:GetWorldPosition())
-	local range_indicators = GLOBAL.TheSim:FindEntities(pos.x,pos.y,pos.z, 2, {"range_indicator"})
+local function MachineOnRemove(inst)
+	local pos = _G.Point(inst.Transform:GetWorldPosition())
+	local range_indicators = _G.TheSim:FindEntities(pos.x,pos.y,pos.z, 2, {"range_indicator"})
 	for i,v in ipairs(range_indicators) do
 		if v:IsValid() then
 			v:Remove()
@@ -29,23 +37,25 @@ function MachineOnRemove(inst)
 	end
 end
 
-function getstatus_mod(inst, viewer)
+local function getstatus_mod(inst, viewer)
 	if inst.name=="Ice Flingomatic" then
-	GLOBAL.TUNING.MACHIN = 1
+	_G.TUNING.MACHIN = 1
 	elseif inst.name=="Sprinkler" then
-	GLOBAL.TUNING.MACHIN = 2
+	_G.TUNING.MACHIN = 2
 	elseif inst.name=="Oscillating Fan" then
-	GLOBAL.TUNING.MACHIN = 3
+	_G.TUNING.MACHIN = 3
 	elseif inst.name=="Lightning Rod" then
-	GLOBAL.TUNING.MACHIN = 4
+	_G.TUNING.MACHIN = 4
 	else
-	GLOBAL.TUNING.MACHIN = 0
+	_G.TUNING.MACHIN = 0
 	end
+	
 	local pos = Point(inst.Transform:GetWorldPosition())
 	local range_indicators = TheSim:FindEntities(pos.x,pos.y,pos.z, 2, {"range_indicator"} )
+	
 	if #range_indicators < 1 then
-	local range = GLOBAL.SpawnPrefab("range_indicator")
-	range.Transform:SetPosition(pos.x, pos.y, pos.z)
+		local range = _G.SpawnPrefab("range_indicator")
+		range.Transform:SetPosition(pos.x, pos.y, pos.z)
 	end
 					
 	if inst.on then
@@ -60,12 +70,7 @@ function getstatus_mod(inst, viewer)
 	
 end
 
-PrefabFiles = 
-{
-	"range"
-}
-
-function MachinePostInit(inst)
+local function MachinePostInit(inst)
 	if inst and inst.components.inspectable then
 		inst.components.inspectable.getstatus = getstatus_mod
 	end

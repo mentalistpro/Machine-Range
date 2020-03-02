@@ -1,6 +1,6 @@
 local assets=
 {
-	Asset("ANIM", "anim/machine_range.zip")    
+	Asset("ANIM", "anim/machine_range.zip"),  
 }
 
 
@@ -31,6 +31,7 @@ local function fn(Sim)
 	
 	inst.persists = false
     inst:AddTag("fx")
+	inst:Add("NOCLICK")
 	inst:AddTag("range_indicator")
     
 	if TUNING.RANGE_CHECK_TIME > 1 then
