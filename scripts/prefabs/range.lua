@@ -3,9 +3,23 @@ local assets=
 	Asset("ANIM", "anim/machine_range.zip"),  
 }
 
+local function ErodeAway(inst)
+    local time_to_erode = 2
+    local tick_time = TheSim:GetTickTime()
 
-local function fn(Sim)
-	
+    inst:StartThread(function()
+        local ticks = 0
+        while ticks * tick_time < time_to_erode do
+            local erode_amount = ticks * tick_time / time_to_erode
+            inst.AnimState:SetErosionParams(erode_amount, 0.1, 1.0)
+            ticks = ticks + 1
+            Yield()
+        end
+        inst:Remove()
+    end)
+end
+
+local function fn()
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
@@ -31,11 +45,10 @@ local function fn(Sim)
 	
 	inst.persists = false
     inst:AddTag("fx")
-	inst:Add("NOCLICK")
 	inst:AddTag("range_indicator")
     
-	if TUNING.RANGE_CHECK_TIME > 1 then
-	inst:DoTaskInTime(TUNING.RANGE_CHECK_TIME, function() inst:Remove() end)
+	if TUNING.RANGE_FADE_TIME > 0 then
+		inst:DoTaskInTime(TUNING.RANGE_FADE_TIME, ErodeAway)
 	end
 	
     return inst
