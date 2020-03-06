@@ -17,21 +17,17 @@ local _G = GLOBAL
 if GetModConfigData("range_fadetime") == 0 then
 	TUNING.RANGE_FADE_TIME = 2
 elseif GetModConfigData("range_fadetime") == 1 then
-	TUNING.RANGE_FADE_TIME = 30
+	TUNING.RANGE_FADE_TIME = 5
 elseif GetModConfigData("range_fadetime") == 2 then
-	TUNING.RANGE_FADE_TIME = 60
+	TUNING.RANGE_FADE_TIME = 10
 elseif GetModConfigData("range_fadetime") == 3 then
-	TUNING.RANGE_FADE_TIME = 180
-end
-
-if GetModConfigData("range_colour") == 0 then
-	TUNING.RANGE_COLOUR = 10
-elseif GetModConfigData("range_colour") == 1 then
-	TUNING.RANGE_COLOUR = 30
-elseif GetModConfigData("range_colour") == 2 then
-	TUNING.RANGE_COLOUR = 60
-elseif GetModConfigData("range_colour") == 3 then
-	TUNING.RANGE_COLOUR = 180
+	TUNING.RANGE_FADE_TIME = 20
+elseif GetModConfigData("range_fadetime") == 4 then
+	TUNING.RANGE_FADE_TIME = 50
+elseif GetModConfigData("range_fadetime") == 5 then
+	TUNING.RANGE_FADE_TIME = 100
+elseif GetModConfigData("range_fadetime") == 6 then	--infinite
+	TUNING.RANGE_FADE_TIME = 0
 end
 
 -----------------------------------------------------------------------------
@@ -49,16 +45,16 @@ local function MachineOnRemove(inst)
 end
 
 local function getstatus_mod(inst, viewer)
-	if inst.name=="Ice Flingomatic" then
-		TUNING.MACHIN = 1
-	elseif inst.name=="Sprinkler" then
-		TUNING.MACHIN = 2
-	elseif inst.name=="Oscillating Fan" then
-		TUNING.MACHIN = 3
-	elseif inst.name=="Lightning Rod" then
-		TUNING.MACHIN = 4
+	if inst.prefab=="basefan" then
+		TUNING.RANGE_TYPE = 1
+	elseif inst.prefab=="firesuppressor" then
+		TUNING.RANGE_TYPE = 2
+	elseif inst.prefab=="lightning_rod" then
+		TUNING.RANGE_TYPE = 3
+	elseif inst.prefab=="sprinkler" then
+		TUNING.RANGE_TYPE = 4
 	else
-		TUNING.MACHIN = 0
+		TUNING.RANGE_TYPE = 0
 	end
 	
 	local pos = _G.Point(inst.Transform:GetWorldPosition())
@@ -79,6 +75,9 @@ local function getstatus_mod(inst, viewer)
 		return "OFF"
 	end
 	
+	if inst.charged then
+		return "CHARGED"
+	end	
 end
 
 local function MachinePostInit(inst)

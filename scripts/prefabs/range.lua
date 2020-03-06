@@ -4,7 +4,7 @@ local assets=
 }
 
 local function ErodeAway(inst)
-    local time_to_erode = 2
+    local time_to_erode = 1
     local tick_time = TheSim:GetTickTime()
 
     inst:StartThread(function()
@@ -23,20 +23,21 @@ local function fn()
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
+	
 	local x
-	if TUNING.MACHIN == 1 then
+	if TUNING.RANGE_TYPE == 1 then		--basefan
 	x = 1.55
-	elseif TUNING.MACHIN == 2 then
-	x = 1.09
-	elseif TUNING.MACHIN == 3 then
+	elseif TUNING.RANGE_TYPE == 2 then	--firesuppressor
 	x = 1.55
-	elseif TUNING.MACHIN == 4 then
+	elseif TUNING.RANGE_TYPE == 3 then	--lightning_rod
 	x = 2.53
+	elseif TUNING.RANGE_TYPE == 4 then	--sprinkler
+	x = 1.09
 	end
     trans:SetScale(x,x,x)
 	
-    anim:SetBank("firefighter_placement")
-    anim:SetBuild("firefighter_range")
+    anim:SetBank("machine_range")
+    anim:SetBuild("machine_range")
     anim:PlayAnimation("idle")
     
 	anim:SetOrientation( ANIM_ORIENTATION.OnGround )
@@ -47,7 +48,7 @@ local function fn()
     inst:AddTag("fx")
 	inst:AddTag("range_indicator")
     
-	if TUNING.RANGE_FADE_TIME > 0 then
+	if TUNING.RANGE_FADE_TIME > 0.1 then
 		inst:DoTaskInTime(TUNING.RANGE_FADE_TIME, ErodeAway)
 	end
 	
