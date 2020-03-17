@@ -38,7 +38,7 @@ local function MachineOnRemove(inst)
 	local range_indicators = _G.TheSim:FindEntities(pos.x,pos.y,pos.z, 2, {"range_indicator"})
 	for i,v in ipairs(range_indicators) do
 		if v:IsValid() then
-            v.AnimState:SetErosionParams(erode_amount, 0.1, 1.0)
+            v.AnimState:SetErosionParams(0, 0.1, 1.0)
 			v:Remove()
 		end
 	end

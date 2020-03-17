@@ -1,7 +1,7 @@
 name                        = "Machine Range Check"
 description                 = "Able you to check range of your machines:\n-Ice Flingomatic\n-Sprinkler\n-Oscillating Fan\n-Lightning Rod"
 author                      = "_Q_, Henry BioHazard and mentalistpro"
-version                     = "1.4"
+version                     = "1.5"
 forumthread                 = ""
 api_version                 = 6
 
