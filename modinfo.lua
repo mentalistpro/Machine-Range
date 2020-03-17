@@ -1,7 +1,7 @@
 name                        = "Machine Range Check"
 description                 = "Able you to check range of your machines:\n-Ice Flingomatic\n-Sprinkler\n-Oscillating Fan\n-Lightning Rod"
-author                      = "_Q_, Henry BioHazard and mentalistpro"
-version                     = "1.5"
+author                      = "Henry BioHazard and mentalistpro"
+version                     = "1.5.1"
 forumthread                 = ""
 api_version                 = 6
 
@@ -17,7 +17,7 @@ configuration_options =
 {
     {
         name = "range_fadetime",
-		label = "Range fades in",
+        label = "Range fades in",
         options =
         {
             {description = "2s", data = 0},
@@ -29,5 +29,16 @@ configuration_options =
             {description = "Infinite", data = 6},
         },
         default = 2,
-    },	
+    },  
+    
+    {
+        name = "campfire_safe",
+        label = "Campfire safe",
+        options =
+        {
+            {description = "Yes", data = 0},
+            {description = "No", data = 1},
+        },
+        default = 0,
+    },  
 }
