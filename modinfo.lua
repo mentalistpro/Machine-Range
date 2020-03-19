@@ -4,6 +4,7 @@ author                      = "Henry BioHazard and mentalistpro"
 version                     = "1.5.1"
 forumthread                 = ""
 api_version                 = 6
+priority					= -1
 
 dont_starve_compatible      = true
 reign_of_giants_compatible  = true
