@@ -1,7 +1,7 @@
-name                        = "Machine Range Check"
+name                        = "Machine Range Indicator"
 description                 = "Able you to check range of your machines:\n-Ice Flingomatic\n-Sprinkler\n-Oscillating Fan\n-Lightning Rod"
 author                      = "Henry BioHazard and mentalistpro"
-version                     = "1.6"
+version                     = "1.6.1"
 forumthread                 = ""
 api_version                 = 6
 priority                    = -1
@@ -30,7 +30,7 @@ configuration_options =
             {description = "Infinite", data = 5},
         },
         default = 0,
-    },  
+    },
 
     {
         name = "automatic_refuel",
@@ -41,8 +41,8 @@ configuration_options =
             {description = "No", data = 1},
         },
         default = 0,
-    },  
-       
+    },
+
     {
         name = "campfire_safe",
         label = "Campfire safe",
@@ -52,8 +52,8 @@ configuration_options =
             {description = "No", data = 1},
         },
         default = 0,
-    },  
-    
+    },
+
     {
         name = "constructionplans",
         label = "Construction plans",
@@ -63,6 +63,6 @@ configuration_options =
             {description = "No", data = 1},
         },
         default = 0,
-    },  
-    
+    },
+
 }
