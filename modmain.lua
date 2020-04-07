@@ -161,6 +161,10 @@ local function OnFuelSectionChange_new(old, new, inst)
 end
 
 --2.3 Container properties
+local function onclose(inst)
+    AddFuel(inst)
+end
+
 local function FlingomaticPostInit(inst)
     local slotpos = {}
     for y = 2, 0, -1 do
@@ -190,6 +194,7 @@ local function FlingomaticPostInit(inst)
     inst.components.container.widgetbuttoninfo = widgetbuttoninfo
     inst.components.container.widgetpos = Vector3(0,200,0)
     inst.components.container.side_align_tip = 160
+    inst.components.container.onclosefn = onclose
 
     inst.components.fueled:SetSectionCallback(OnFuelSectionChange_new)
 end
