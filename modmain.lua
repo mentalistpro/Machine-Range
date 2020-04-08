@@ -254,7 +254,7 @@ if GetModConfigData("constructionplans") == 0 then
 
     _S.NAMES.LIGHTNING_ROD_CONSTRUCTION = "Lightning Rod Plan"
     _S.RECIPE_DESC.LIGHTNING_ROD_CONSTRUCTION = "Well prepared in advance."
-    _S.CHARACTERS.GENERIC.LIGHTNING_ROD_CONSTRUCTION = "Well prepared in advance."
+    _S.CHARACTERS.GENERIC.DESCRIBE.LIGHTNING_ROD_CONSTRUCTION = "Well prepared in advance."
 
     --Firesuppressor
     local firesuppressor_construction = Recipe(
@@ -267,7 +267,7 @@ if GetModConfigData("constructionplans") == 0 then
 
     _S.NAMES.FIRESUPPRESSOR_CONSTRUCTION = "Ice Flingomatic Plan"
     _S.RECIPE_DESC.FIRESUPPRESSOR_CONSTRUCTION = "Well prepared in advance."
-    _S.CHARACTERS.GENERIC.FIRESUPPRESSOR_CONSTRUCTION = "Well prepared in advance."
+    _S.CHARACTERS.GENERIC.DESCRIBE.FIRESUPPRESSOR_CONSTRUCTION = "Well prepared in advance."
 
     --Sprinkler
     local sprinkler_construction = Recipe(
@@ -280,7 +280,7 @@ if GetModConfigData("constructionplans") == 0 then
 
     _S.NAMES.SPRINKLER_CONSTRUCTION = "Sprinkler Plan"
     _S.RECIPE_DESC.SPRINKLER_CONSTRUCTION = "Well prepared in advance."
-    _S.CHARACTERS.GENERIC.SPRINKLER_CONSTRUCTION = "Well prepared in advance."
+    _S.CHARACTERS.GENERIC.DESCRIBE.SPRINKLER_CONSTRUCTION = "Well prepared in advance."
 
     --Basefan
     local basefan_construction = Recipe(
@@ -293,7 +293,7 @@ if GetModConfigData("constructionplans") == 0 then
 
     _S.NAMES.BASEFAN_CONSTRUCTION = "Oscillating Fan Plan"
     _S.RECIPE_DESC.BASEFAN_CONSTRUCTION = "Well prepared in advance."
-    _S.CHARACTERS.GENERIC.BASEFAN_CONSTRUCTION = "Well prepared in advance."
+    _S.CHARACTERS.GENERIC.DESCRIBE.BASEFAN_CONSTRUCTION = "Well prepared in advance."
 
 --4.2 Range appears automatically with machine_constructions
     local function SpawnIndicator(inst)

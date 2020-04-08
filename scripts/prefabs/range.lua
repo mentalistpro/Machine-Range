@@ -48,7 +48,6 @@ local function MakeRange(name, postinit)
         anim:SetMultColour(1,0,0,0.8)
         anim:SetSortOrder(3)
 
-        inst.persists = false
         inst:AddTag("fx")
         inst:AddTag("NOCLICK")
         inst:AddTag("range_indicator")
@@ -66,6 +65,7 @@ end
 --------------------------------------------------------------------------
 
 local function postinit1(inst)
+    inst.persists = true    --persists before ErodeAway
     if TUNING.RANGE_FADE_TIME > 0.1 then
         inst:DoTaskInTime(TUNING.RANGE_FADE_TIME, ErodeAway)
     end
@@ -73,8 +73,10 @@ end
 
 local function postinit2(inst)
     local anim = inst.entity:AddAnimState()
-    anim:SetMultColour(0.3,.8,0,0.5)
-    inst.persists = true
+    anim:SetMultColour(0,1,1,1.3)
+    anim:SetAddColour(0,1,1,.3)
+    anim:SetLightOverride(1)
+    inst.persists = true    --persists after colour changes
 end
 
 --------------------------------------------------------------------------

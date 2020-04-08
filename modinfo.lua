@@ -1,7 +1,7 @@
 name                        = "Machine Range Indicator"
 description                 = "Able you to check range of your machines:\n-Ice Flingomatic\n-Sprinkler\n-Oscillating Fan\n-Lightning Rod"
 author                      = "Henry BioHazard and mentalistpro"
-version                     = "1.6.2"
+version                     = "1.6.3"
 forumthread                 = ""
 api_version                 = 6
 priority                    = -1
